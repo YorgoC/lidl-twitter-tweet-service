@@ -5,6 +5,8 @@ namespace lidl_twitter_tweet_service.DTOs
 {
     public class ReadLidlTweet
     {
+        public int Id { get; set; }
+        
         public int UserId { get; set; }
         
         public string Text { get; set; }

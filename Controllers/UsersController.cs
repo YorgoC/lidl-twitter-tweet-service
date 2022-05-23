@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using AutoMapper;
 using lidl_twitter_tweet_service.Data;
+using lidl_twitter_tweet_service.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lidl_twitter_tweet_service.Controllers
@@ -16,6 +18,16 @@ namespace lidl_twitter_tweet_service.Controllers
         {
             _repository = repository;
             _mapper = mapper;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<ReadUser>> GetUsers()
+        {
+            Console.WriteLine("--> Getting Users from LidlTweetService");
+
+            var userItems = _repository.GetAllUsers();
+
+            return Ok(_mapper.Map<IEnumerable<ReadUser>>(userItems));
         }
 
         [HttpPost]
