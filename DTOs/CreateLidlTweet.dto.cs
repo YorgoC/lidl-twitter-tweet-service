@@ -1,22 +1,14 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace lidl_twitter_tweet_service.DTOs
 {
     public class CreateLidlTweet
-    {           
-        public int UserId { get; set; }
-        
-        //for retweet purposes
-        public int AuthorId { get; set; }
-
+    {
+        [Required]
         public string Text { get; set; }
         
-        public int Likes { get; set; }
-        
-        public int Retweets { get; set; }
-        
-        public int Comments { get; set; }
-
+        [Required]
         public DateTime CreationTime { get; set; }
     }
 }

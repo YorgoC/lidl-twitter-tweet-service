@@ -10,9 +10,9 @@ namespace lidl_twitter_tweet_service.Models
         [Required]
         public int Id { get; set; }
         
+        [Required]
         public int UserId { get; set; }
         
-        [Required]
         public User User { get; set; }
 
         [Required]
@@ -24,6 +24,7 @@ namespace lidl_twitter_tweet_service.Models
         
         public int Comments { get; set; }
 
+        [Required]
         public DateTime CreationTime { get; set; }
         
       //  public ICollection<User> Retweeters { get; set; }
