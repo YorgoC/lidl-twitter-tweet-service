@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace lidl_twitter_tweet_service.Models
@@ -9,13 +10,11 @@ namespace lidl_twitter_tweet_service.Models
         [Required]
         public int Id { get; set; }
         
-        [Required]
         public int UserId { get; set; }
         
-        //for retweet purposes
         [Required]
-        public int AuthorId { get; set; }
-        
+        public User User { get; set; }
+
         [Required]
         public string Text { get; set; }
         
@@ -27,6 +26,8 @@ namespace lidl_twitter_tweet_service.Models
 
         public DateTime CreationTime { get; set; }
         
+      //  public ICollection<User> Retweeters { get; set; }
+
 
     }
 }

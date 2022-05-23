@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace lidl_twitter_tweet_service.Models
@@ -11,6 +12,13 @@ namespace lidl_twitter_tweet_service.Models
         public string ProfilePicture { get; set; }
 
         [Required]
-        public string Username { get; set; }
+        public string UserName { get; set; }
+        
+        public string NickName { get; set; }
+        
+        public ICollection<LidlTweet> Tweets { get; set; }
+        
+        //for retweet purposes
+        // public int TweetID { get; set; }
     }
 }
