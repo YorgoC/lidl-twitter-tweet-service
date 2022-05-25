@@ -16,9 +16,12 @@ namespace lidl_twitter_tweet_service
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -26,7 +29,20 @@ namespace lidl_twitter_tweet_service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMemoryDB"));
+            if (_env.IsProduction())
+            {
+                Console.WriteLine("--> Using MySQL server Db");
+                services.AddDbContext<AppDbContext>(opt =>
+                    opt.UseMySQL(Configuration.GetConnectionString("TweetServiceDB")));
+            }
+            else
+            {
+                Console.WriteLine("--> Using InMemory Db");
+                services.AddDbContext<AppDbContext>(opt =>
+                    opt.UseInMemoryDatabase("InMemory"));
+            }
+            
+            
             services.AddScoped<ILidlTweetRepo, LidlTweetRepo>();
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -48,6 +64,8 @@ namespace lidl_twitter_tweet_service
             {
                 endpoints.MapControllers();
             });
+            
+            PrepDb.PrepPopulation(app, env.IsProduction());
         }
     }
 }
