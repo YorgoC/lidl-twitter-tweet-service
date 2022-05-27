@@ -8,13 +8,16 @@ namespace lidl_twitter_tweet_service.Models
         [Key]
         [Required]
         public int Id { get; set; }
-
+        
+        [Required]
+        public int ExternalId { get; set; }
+        
         public string ProfilePicture { get; set; }
 
         [Required]
         public string UserName { get; set; }
         
-        public string NickName { get; set; }
+        public string MentionName { get; set; }
         
         public ICollection<LidlTweet> Tweets { get; set; }
         

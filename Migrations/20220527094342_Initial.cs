@@ -14,9 +14,10 @@ namespace lidl_twitter_tweet_service.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    ExternalId = table.Column<int>(type: "int", nullable: false),
                     ProfilePicture = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "text", nullable: false),
-                    NickName = table.Column<string>(type: "text", nullable: true)
+                    MentionName = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -9,7 +9,7 @@ using lidl_twitter_tweet_service.Data;
 namespace lidl_twitter_tweet_service.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220525110838_Initial")]
+    [Migration("20220527094342_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,10 @@ namespace lidl_twitter_tweet_service.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("NickName")
+                    b.Property<int>("ExternalId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MentionName")
                         .HasColumnType("text");
 
                     b.Property<string>("ProfilePicture")

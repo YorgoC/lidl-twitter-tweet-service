@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using lidl_twitter_tweet_service.AsyncDataServices;
 using lidl_twitter_tweet_service.Data;
+using lidl_twitter_tweet_service.EventProcessing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +47,8 @@ namespace lidl_twitter_tweet_service
             
             services.AddScoped<ILidlTweetRepo, LidlTweetRepo>();
             services.AddControllers();
+            services.AddHostedService<MessageBusSubscriber>();
+            services.AddSingleton<IEventProcessor, EventProcessor>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 

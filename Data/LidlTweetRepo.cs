@@ -39,6 +39,11 @@ namespace lidl_twitter_tweet_service.Data
             return _context.Users.Any(p => p.Id == userId);
         }
 
+        public bool ExternalUserExists(int externalUserId)
+        {
+            return _context.Users.Any(p => p.ExternalId == externalUserId);
+        }
+
         public IEnumerable<LidlTweet> GetLidlTweetsForUser(int userId)
         {
             return _context.Tweets

@@ -55,7 +55,10 @@ namespace lidl_twitter_tweet_service.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("NickName")
+                    b.Property<int>("ExternalId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MentionName")
                         .HasColumnType("text");
 
                     b.Property<string>("ProfilePicture")

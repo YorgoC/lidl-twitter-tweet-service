@@ -12,6 +12,9 @@ namespace lidl_twitter_tweet_service.Profiles
             CreateMap<User, ReadUser>();
             CreateMap<CreateLidlTweet, LidlTweet>();
             CreateMap<LidlTweet, ReadLidlTweet>();
+            CreateMap<PublishedUser, User>()
+                .ForMember(dest => dest.ExternalId,
+                    opt => opt.MapFrom(src => src.Id));
         }
     }
 }

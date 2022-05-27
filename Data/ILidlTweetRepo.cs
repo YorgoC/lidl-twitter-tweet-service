@@ -11,6 +11,7 @@ namespace lidl_twitter_tweet_service.Data
         IEnumerable<User> GetAllUsers();
         void CreateUser(User user);
         bool UserExists(int userId);
+        bool ExternalUserExists(int externalUserId);
         
         //Lidl Tweets
         IEnumerable<LidlTweet> GetLidlTweetsForUser(int userId);
