@@ -27,7 +27,7 @@ namespace lidl_twitter_tweet_service.EventProcessing
             switch (eventType)
             {
                 case EventType.UserPublished:
-                    //TODO
+                    addUser(message);
                     break;
                 default:
                     break;
@@ -65,6 +65,7 @@ namespace lidl_twitter_tweet_service.EventProcessing
                     {
                         repo.CreateUser(user);
                         repo.SaveChanges();
+                        Console.WriteLine("--> User added!");
                     }
                     else
                     {
