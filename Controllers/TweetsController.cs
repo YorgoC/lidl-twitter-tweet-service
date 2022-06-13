@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace lidl_twitter_tweet_service.Controllers
 {
-    [Route("api/t/users/{userId}/[controller]")]
+    [Route("api/[controller]/{Auth0Id}")]
     [ApiController]
     public class TweetsController : ControllerBase
     {
