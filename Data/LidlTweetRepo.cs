@@ -43,6 +43,11 @@ namespace lidl_twitter_tweet_service.Data
         {
             return _context.Users.Any(p => p.ExternalId == externalUserId);
         }
+        public User GetUserByExternalId(int externalUserId)
+        {
+            return _context.Users
+                .FirstOrDefault(p => p.ExternalId == externalUserId);
+        }
 
         public IEnumerable<LidlTweet> GetLidlTweetsForUser(int userId)
         {
@@ -53,8 +58,7 @@ namespace lidl_twitter_tweet_service.Data
 
         public LidlTweet GetLidlTweet(int userId, int lidlTweetId)
         {
-            return _context.Tweets
-                .Where(c => c.UserId == userId && c.Id == lidlTweetId).FirstOrDefault();
+            return _context.Tweets.FirstOrDefault(c => c.UserId == userId && c.Id == lidlTweetId);
         }
 
         public void CreateLidlTweet(int userId, LidlTweet lidlTweet)

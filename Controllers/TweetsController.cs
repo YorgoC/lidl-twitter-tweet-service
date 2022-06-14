@@ -58,24 +58,26 @@ namespace lidl_twitter_tweet_service.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ReadLidlTweet> CreateLidlTweet(int userId, CreateLidlTweet createLidlTweet)
+        public ActionResult<ReadLidlTweet> CreateLidlTweet(int externalId, CreateLidlTweet createLidlTweet)
         {
-            Console.WriteLine($"--> CreateLidlTweet: {userId}");
-            
-            if (!_repository.UserExists(userId))
+            Console.WriteLine($"--> CreateLidlTweet: {externalId}");
+
+            if (!_repository.ExternalUserExists(externalId))
             {
                 return NotFound();
             }
 
+            var user = _repository.GetUserByExternalId(externalId);
+            
             var lidlTweet = _mapper.Map<LidlTweet>(createLidlTweet);
             
-            _repository.CreateLidlTweet(userId, lidlTweet);
+            _repository.CreateLidlTweet(user.Id, lidlTweet);
             _repository.SaveChanges();
 
             var readLidlTweet = _mapper.Map<ReadLidlTweet>(lidlTweet);
             
             return CreatedAtRoute(nameof(GetLidlTweet),
-                new {userId = userId, id = readLidlTweet.Id}, readLidlTweet);
+                new {userId = user.Id, id = readLidlTweet.Id}, readLidlTweet);
         }
 
     }

@@ -20,7 +20,7 @@
     "lidl_twitter_tweet_service": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "",
       "applicationUrl": "http://localhost:6000",
       "environmentVariables": {
