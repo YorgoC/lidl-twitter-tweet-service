@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using lidl_twitter_tweet_service.Data;
 using lidl_twitter_tweet_service.DTOs;
@@ -21,7 +22,7 @@ namespace lidl_twitter_tweet_service.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("gettweets", Name = "GetLidlTweetsForUser")]
+        [HttpGet("gettweets/{auth0Id}", Name = "GetLidlTweetsForUser")]
         public ActionResult<IEnumerable<ReadLidlTweet>> GetLidlTweetsForUser(string auth0Id)
         {
             Console.WriteLine($"--> Hit GetLidlTweetsForUser: {auth0Id}");
@@ -40,7 +41,7 @@ namespace lidl_twitter_tweet_service.Controllers
         public ActionResult<ReadLidlTweet> GetLidlTweet(int lidlTweetId)
         {
             
-            Console.WriteLine($"--> Hit GetLidlTweetsForUser: {lidlTweetId}");
+            Console.WriteLine($"--> Hit GetLidlTweetForUser: {lidlTweetId}");
             
             var lidlTweet = _repository.GetLidlTweet(lidlTweetId);
 
@@ -63,16 +64,15 @@ namespace lidl_twitter_tweet_service.Controllers
             }
 
             var user = _repository.GetUserByAuth0Id(createLidlTweet.Auth0Id);
-            
             var lidlTweet = _mapper.Map<LidlTweet>(createLidlTweet);
+            
             
             _repository.CreateLidlTweet(user.Id, lidlTweet);
             _repository.SaveChanges();
 
             var readLidlTweet = _mapper.Map<ReadLidlTweet>(lidlTweet);
             
-            return CreatedAtRoute(nameof(GetLidlTweet),
-                new {userId = user.Id, id = readLidlTweet.Id}, readLidlTweet);
+            return CreatedAtRoute(nameof(GetLidlTweet), new {lidlTweetId = readLidlTweet.Id}, readLidlTweet);
         }
 
     }

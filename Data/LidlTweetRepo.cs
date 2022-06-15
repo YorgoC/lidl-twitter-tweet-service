@@ -57,9 +57,12 @@ namespace lidl_twitter_tweet_service.Data
 
         public IEnumerable<LidlTweet> GetLidlTweetsForUser(string auth0Id)
         {
+            int id = GetUserByAuth0Id(auth0Id).Id;
+            Console.WriteLine("this is the id of the user: " + id);
             return _context.Tweets
-                .Where(c => c.UserId == GetUserByAuth0Id(auth0Id).Id)
-                .OrderBy(c => c.CreationTime);
+                .Where(c => c.UserId == id)
+                .OrderBy(c => c.CreationTime)
+                .ToList();
         }
 
         public LidlTweet GetLidlTweet(int lidlTweetId)

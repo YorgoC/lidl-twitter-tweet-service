@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using lidl_twitter_tweet_service.AsyncDataServices;
 using lidl_twitter_tweet_service.Data;
@@ -44,9 +45,8 @@ namespace lidl_twitter_tweet_service
                     opt.UseInMemoryDatabase("InMemory"));
             }
             
-            
-            services.AddScoped<ILidlTweetRepo, LidlTweetRepo>();
             services.AddControllers();
+            services.AddScoped<ILidlTweetRepo, LidlTweetRepo>();
             services.AddHostedService<MessageBusSubscriber>();
             services.AddSingleton<IEventProcessor, EventProcessor>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

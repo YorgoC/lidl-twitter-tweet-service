@@ -36,7 +36,6 @@ namespace lidl_twitter_tweet_service.Data
             if (!context.Users.Any())
             {
                 Console.WriteLine("--> seeding data");
-                   
 
                 context.SaveChanges();
             }
