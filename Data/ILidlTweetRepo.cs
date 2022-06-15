@@ -10,13 +10,16 @@ namespace lidl_twitter_tweet_service.Data
         //Users
         IEnumerable<User> GetAllUsers();
         void CreateUser(User user);
-        bool UserExists(int userId);
+        bool UserExists(string auth0Id);
         bool ExternalUserExists(int externalUserId);
 
         User GetUserByExternalId(int externalUserId);
+        
+        User GetUserByAuth0Id(string auth0Id);
+        
         //Lidl Tweets
-        IEnumerable<LidlTweet> GetLidlTweetsForUser(int userId);
-        LidlTweet GetLidlTweet(int userId, int lidlTweetId);
+        IEnumerable<LidlTweet> GetLidlTweetsForUser(string auth0Id);
+        LidlTweet GetLidlTweet(int lidlTweetId);
         void CreateLidlTweet(int userId, LidlTweet lidlTweet);
     }
 }

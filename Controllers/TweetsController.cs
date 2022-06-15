@@ -22,32 +22,27 @@ namespace lidl_twitter_tweet_service.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ReadLidlTweet>> GetLidlTweetsForUser(int userId)
+        public ActionResult<IEnumerable<ReadLidlTweet>> GetLidlTweetsForUser(string auth0Id)
         {
-            Console.WriteLine($"--> Hit GetLidlTweetsForUser: {userId}");
+            Console.WriteLine($"--> Hit GetLidlTweetsForUser: {auth0Id}");
 
-            if (!_repository.UserExists(userId))
+            if (!_repository.UserExists(auth0Id))
             {
                 return NotFound();
             }
 
-            var lidlTweets = _repository.GetLidlTweetsForUser(userId);
+            var lidlTweets = _repository.GetLidlTweetsForUser(auth0Id);
 
             return Ok(_mapper.Map<IEnumerable<ReadLidlTweet>>(lidlTweets));
         }
 
         [HttpGet("{lidlTweetId}", Name = "GetLidlTweet")]
-        public ActionResult<ReadLidlTweet> GetLidlTweet(int userId, int lidlTweetId)
+        public ActionResult<ReadLidlTweet> GetLidlTweet(int lidlTweetId)
         {
             
-            Console.WriteLine($"--> Hit GetLidlTweetsForUser: {userId} / {lidlTweetId}");
+            Console.WriteLine($"--> Hit GetLidlTweetsForUser: {lidlTweetId}");
             
-            if (!_repository.UserExists(userId))
-            {
-                return NotFound();
-            }
-
-            var lidlTweet = _repository.GetLidlTweet(userId, lidlTweetId);
+            var lidlTweet = _repository.GetLidlTweet(lidlTweetId);
 
             if (lidlTweet == null)
             {
@@ -58,16 +53,16 @@ namespace lidl_twitter_tweet_service.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ReadLidlTweet> CreateLidlTweet(int externalId, CreateLidlTweet createLidlTweet)
+        public ActionResult<ReadLidlTweet> CreateLidlTweet(CreateLidlTweet createLidlTweet)
         {
-            Console.WriteLine($"--> CreateLidlTweet: {externalId}");
+            Console.WriteLine($"--> CreateLidlTweet: {createLidlTweet.Auth0Id}");
 
-            if (!_repository.ExternalUserExists(externalId))
+            if (!_repository.UserExists(createLidlTweet.Auth0Id))
             {
                 return NotFound();
             }
 
-            var user = _repository.GetUserByExternalId(externalId);
+            var user = _repository.GetUserByAuth0Id(createLidlTweet.Auth0Id);
             
             var lidlTweet = _mapper.Map<LidlTweet>(createLidlTweet);
             

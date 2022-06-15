@@ -7,7 +7,7 @@ namespace lidl_twitter_tweet_service.DTOs
     {
         
         [Required]
-        public int ExternalId { get; set; }
+        public string Auth0Id { get; set; }
         
         [Required]
         public string Text { get; set; }

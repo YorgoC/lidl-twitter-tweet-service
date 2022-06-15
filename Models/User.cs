@@ -12,6 +12,9 @@ namespace lidl_twitter_tweet_service.Models
         [Required]
         public int ExternalId { get; set; }
         
+        [Required]
+        public string Auth0Id { get; set; }
+        
         public string ProfilePicture { get; set; }
 
         [Required]
