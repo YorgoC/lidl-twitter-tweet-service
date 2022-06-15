@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace lidl_twitter_tweet_service.Controllers
 {
-    [Route("api/[controller]/{Auth0Id}")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TweetsController : ControllerBase
     {
@@ -21,7 +21,7 @@ namespace lidl_twitter_tweet_service.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpPost("gettweets", Name = "GetLidlTweetsForUser")]
         public ActionResult<IEnumerable<ReadLidlTweet>> GetLidlTweetsForUser(string auth0Id)
         {
             Console.WriteLine($"--> Hit GetLidlTweetsForUser: {auth0Id}");
@@ -52,7 +52,7 @@ namespace lidl_twitter_tweet_service.Controllers
             return Ok(_mapper.Map<ReadLidlTweet>(lidlTweet));
         }
 
-        [HttpPost]
+        [HttpPost("tweet", Name = "Tweet")]
         public ActionResult<ReadLidlTweet> CreateLidlTweet(CreateLidlTweet createLidlTweet)
         {
             Console.WriteLine($"--> CreateLidlTweet: {createLidlTweet.Auth0Id}");
